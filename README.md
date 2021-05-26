@@ -1,4 +1,4 @@
-![Fellows Logo](https://storage.googleapis.com/incind/FellowshipnANyYTE.png)
+<img src=https://storage.googleapis.com/incind/FellowshipnANyYTE.png width=400>
 
 
 ### Hello 
