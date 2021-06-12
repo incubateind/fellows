@@ -12,20 +12,20 @@ IncubateIND Technology Fellowship is a unique and exclusive program for the code
 
 Let's dive deep into what we are looking for:
 1. It's a Community platform for 3 main uses.
-- Community Event listing
-- Community leaderboard
-- Managing the Community
-2. A profile system to keep a track of different Community leaders and their initiative.
-3. The leaderboard will work automatically on the basis or scoring scheme provide along with manual functionality for Admin not for Community leaders.
+   - Community Event listing
+   - Community leaderboard
+   - Managing the Community
+2. A profile system to keep a track of different Community leaders and their initiatives.
+3. The leaderboard will work automatically on the basis of a scoring scheme provided along with manual functionality for Admin and not for Community leaders.
 
-General apperance:
-- The website will have have a leaderboard integrated .
-- A dyanmic lisiting of Event & Initiatives by Fellows Leads.
+General appearance:
+- The website will have a leaderboard integrated.
+- A dynamic listing of events & Initiatives by Fellows Leads.
 
 Profile Section:
--Dashboard
--Profile
--Forms section:
-       - 1st form to request support / proposal of the event or initiative.
-       - 2nd form to submit the report of the event / event executed. 
-       - 3rd form requesting goodies.
+- Dashboard
+- Profile
+- Forms section:
+  - 1st form to request support / proposal of the event or initiative.
+  - 2nd form to submit the report of the event / event executed. 
+  - 3rd form requesting goodies.
