@@ -1,17 +1,5 @@
-import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
-import {
-  Profile,
-  Dashboard,
-  Analytics,
-  HostEventForm,
-  Communities,
-  Events,
-  MyParticipations,
-  MyCommunities,
-  CreateCommunity,
-} from './Pages';
-import { NavigationWrapper, HomeNavigationWrapper } from './WrapperComponents';
 import './App.css';
+import './styles/App.scss';
 import AppRouter from './AppRouter';
 
 function App() {

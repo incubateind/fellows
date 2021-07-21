@@ -2,7 +2,8 @@ import { Layout } from 'antd';
 import { BrowserRouter as Router } from 'react-router-dom';
 import LayoutHeader from './components/layout/LayoutHeader/LayoutHeader';
 import LayoutSider from './components/layout/LayoutSider/LayoutSider';
-import AuthRouter from './router/AuthRouter';
+
+import AuthRouter from '../src/router/authRouter';
 
 const { Content } = Layout;
 
@@ -10,20 +11,17 @@ const AppRouter = () => {
   const isLoggedIn = true;
 
   return (
-    <div style={{}}>
-      <Router>
-        <Layout>
+    <Router>
+      <Layout className="parent-layout">
+        <LayoutHeader />
+        <Layout className="child-layout">
           {isLoggedIn && <LayoutSider />}
-
-          <Layout>
-            {isLoggedIn && <LayoutHeader />}
-            <Content className="main-content">
-              <AuthRouter />
-            </Content>
-          </Layout>
+          <Content className="super-content">
+            <AuthRouter />
+          </Content>
         </Layout>
-      </Router>
-    </div>
+      </Layout>
+    </Router>
   );
 };
 

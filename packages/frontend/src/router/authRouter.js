@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
-import LoginScreen from '../screens/loginScreen';
+
 import HostEventFormPage from '../Pages/HostEventForm/HostEventForm';
 import DashboardPage from '../Pages/Dashboard/Dashboard';
 import EventDescPage from '../Pages/Events/EventDesc';
@@ -31,8 +31,6 @@ const AuthRouter = () => {
         exact
         component={() => <CommunitiesPage />}
       />
-      <Route path={ROUTES.LOGIN} exact component={() => <LoginScreen />} />
-      <Route path="/" exact component={() => <LoginScreen />} />
     </>
   );
 };
