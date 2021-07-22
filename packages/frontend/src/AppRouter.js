@@ -13,7 +13,7 @@ const AppRouter = () => {
   return (
     <Router>
       <Layout className="parent-layout">
-        <LayoutHeader />
+        {isLoggedIn && <LayoutHeader />}
         <Layout className="child-layout">
           {isLoggedIn && <LayoutSider />}
           <Content className="super-content">

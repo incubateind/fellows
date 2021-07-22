@@ -1,4 +1,4 @@
-import { Layout, Dropdown, Avatar, Menu, Select } from 'antd';
+import { Layout, Dropdown, Avatar, Menu } from 'antd';
 
 import {
   CaretDownFilled,
@@ -17,17 +17,13 @@ const LayoutHeader = () => {
 
   const rightContainer = () => (
     <div className="header-sub-container-2">
-      <Menu mode="horizontal">
-        <Menu.Item key="1" className="profile-menu">
-          <Dropdown overlay={menu}>
-            <div className="user-img">
-              <CaretDownFilled />
-              Varun Khalate
-              <Avatar className="avtaar" size="large" icon={<UserOutlined />} />
-            </div>
-          </Dropdown>
-        </Menu.Item>
-      </Menu>
+      <Dropdown overlay={menu}>
+        <div className="user-img">
+          <CaretDownFilled />
+          Varun
+          <Avatar className="avtaar" size="large" icon={<UserOutlined />} />
+        </div>
+      </Dropdown>
     </div>
   );
 

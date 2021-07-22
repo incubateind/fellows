@@ -9,7 +9,7 @@ const { Sider } = Layout;
 
 export default function LayoutSider() {
   const [collapsed, setCollapsed] = useState(false);
-
+  console.log(MenuKeys);
   return (
     <Sider
       collapsible

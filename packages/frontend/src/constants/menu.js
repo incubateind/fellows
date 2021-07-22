@@ -18,21 +18,25 @@ const Menu = [
   {
     name: 'Analytics',
     icon: <AreaChartOutlined className="sider-icon" />,
+    route: Routes.ANALYTICS,
     subMenu: false,
   },
   {
     name: 'Host Event',
     icon: <FormOutlined className="sider-icon" />,
+    route: Routes.HOST_EVENT,
     subMenu: false,
   },
   {
     name: 'Communities',
     icon: <TeamOutlined className="sider-icon" />,
+    route: Routes.COMMUNITIES,
     subMenu: false,
   },
   {
     name: 'Events',
     icon: <TeamOutlined className="sider-icon" />,
+    route: Routes.EVENTS,
     subMenu: false,
   },
 
