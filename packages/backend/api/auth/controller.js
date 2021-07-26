@@ -1,71 +1,63 @@
-const ErrorResponse = require('../../util/errorResponse');
-const asyncHandler = require('../../middleware/async');
-const User = require('../user/model');
+const express = require("express");
+const router = express.Router();
+const passport = require("passport");
+const auth = require("../../config/passport");
+const logout = require("express-passport-logout");
 
-exports.register = asyncHandler(async (req, res, next)=>{
-    const {name, email, password, username} = req.body;
-    const user = await User.create({name, email, password, username});
-    sendTokenResponse(user, 200, res);
+passport.use(auth.githubStrategy);
+passport.use(auth.linkedinStrategy);
+passport.use(auth.googleStrategy);
+
+passport.deserializeUser(auth.deserializeUser);
+passport.serializeUser(auth.serializeUser);
+
+router.get("/auth/github", passport.authenticate("github"));
+router.get(
+  "/auth/github/callback",
+  passport.authenticate("github"),
+  (req, res) => {
+    res.redirect(301, "http://localhost:3000/");
+  }
+);
+router.get("/profile", (req, res) => {
+  res.send(user);
 });
 
-exports.login = asyncHandler(async (req, res, next) => {
-    const {email, password} = req.body;
+//Google
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google"),
+  (req, res) => {
+    res.redirect(301, "http://localhost:3000/");
+  }
+);
+//linkedin
 
-    // Validate email & password
-    if (!email || !password) {
-        return next(new ErrorResponse('Please provide an email and password', 400));
-    }
+router.get("/auth/linkedin", passport.authenticate("linkedin"));
 
-    // Check for user
-    const user = await User.findOne({email}).select('+password');
+router.get(
+  "/auth/linkedin/callback",
+  passport.authenticate("linkedin"),
+  (req, res) => {
+    res.redirect(301, "http://localhost:3000/");
+  }
+);
 
-    if (!user) {
-        return next(new ErrorResponse('Invalid credentials', 401));
-    }
-
-    // Check if password matches
-    const isMatch = await user.matchPassword(password);
-
-    if (!isMatch) {
-        return next(new ErrorResponse('Invalid credentials', 401));
-    }
-    sendTokenResponse(user, 200, res);
+//userinfo
+router.get("/user", (req, res) => {
+  console.log("getting user data!");
 });
 
-exports.logout = asyncHandler(async (req, res, next) => {
-    res.cookie('token', 'none', {
-        expires: new Date(Date.now() + 10 * 1000),
-        httpOnly: true,
-    });
-
-    res.status(200).json({
-        success: true,
-        data: {},
-    });
+router.get("/auth/logout", (req, res) => {
+  logout();
+  console.log("logging out!");
+  user = {};
+  res.redirect(301, "http://localhost:3000/");
 });
-
-exports.updatePassword = asyncHandler(async (req, res, next) => {
-    const user = await User.findById(req.user.id).select('+password');
-
-    // Check current password
-    if (!(await user.matchPassword(req.body.currentPassword))) {
-        return next(new ErrorResponse('Password is incorrect', 401));
-    }
-
-    user.password = req.body.newPassword;
-    await user.save();
-
-    sendTokenResponse(user, 200, res);
-});
-
-// Get token from model, create cookie and send response
-const sendTokenResponse = (user, statusCode, res) => {
-    // Create token
-    const token = user.getSignedJwtToken();
-    const options = {
-        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
-        httpOnly: true,
-        secure: true
-    };
-    res.status(statusCode).cookie('token', token, options).json({success: true, token});
-};
+module.exports = router;
