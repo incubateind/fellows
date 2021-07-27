@@ -1,15 +1,17 @@
 import { Route } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 
-import HostEventFormPage from '../Pages/HostEventForm/HostEventForm';
-import DashboardPage from '../Pages/Dashboard/Dashboard';
-import EventDescPage from '../Pages/Events/EventDesc';
-import AnalyticsPage from '../Pages/Analytics/Analytics';
-import CommunitiesPage from '../Pages/Communities/Communities';
+import { LandingPage, HostEventFormPage, DashboardPage, EventDescPage, AnalyticsPage, CommunitiesPage } from '../Pages';
+
 
 const AuthRouter = () => {
   return (
     <>
+      <Route
+        path={ROUTES.LANDING}
+        exact
+        component={() => <LandingPage />}
+      />
       <Route
         path={ROUTES.DASHBOARD}
         exact
