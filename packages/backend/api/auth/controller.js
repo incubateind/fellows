@@ -11,53 +11,48 @@ passport.use(auth.googleStrategy);
 passport.deserializeUser(auth.deserializeUser);
 passport.serializeUser(auth.serializeUser);
 
-router.get("/auth/github", passport.authenticate("github"));
-router.get(
-  "/auth/github/callback",
-  passport.authenticate("github"),
-  (req, res) => {
-    res.redirect(301, "http://localhost:3000/");
-  }
-);
-router.get("/profile", (req, res) => {
-  res.send(user);
-});
+//Github
+const authGithub = passport.authenticate("github");
 
 //Google
-router.get(
-  "/auth/google",
-  passport.authenticate("google", {
+const authGoogle = passport.authenticate("google", {
     scope: ["profile", "email"],
-  })
-);
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google"),
-  (req, res) => {
-    res.redirect(301, "http://localhost:3000/");
-  }
-);
-//linkedin
-
-router.get("/auth/linkedin", passport.authenticate("linkedin"));
-
-router.get(
-  "/auth/linkedin/callback",
-  passport.authenticate("linkedin"),
-  (req, res) => {
-    res.redirect(301, "http://localhost:3000/");
-  }
-);
-
-//userinfo
-router.get("/user", (req, res) => {
-  console.log("getting user data!");
 });
 
-router.get("/auth/logout", (req, res) => {
+const authGoogleCallback = passport.authenticate("google");
+
+//linkedin
+const authLinkedin = passport.authenticate("linkedin");
+
+//userinfo
+const redirect = (req, res) => {
+  res.redirect(301, "http://localhost:3000/");
+};
+
+const profile =  (req, res) => {
+  //res.send(user);
+  res.send("User Data");
+};
+
+const userInfo = (req, res) => {
+  console.log("getting user data!");
+};
+
+const authLogout =  (req, res) => {
   logout();
   console.log("logging out!");
   user = {};
   res.redirect(301, "http://localhost:3000/");
-});
-module.exports = router;
+};
+
+
+module.exports = {
+  authGithub,
+  authGoogle,
+  authGoogleCallback,
+  authLinkedin,
+  authLogout,
+  userInfo,
+  redirect,
+  profile
+};

@@ -2,6 +2,7 @@ const passport = require("passport");
 const GithubStrategy = require("passport-github").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const LinkedInStrategy = require("passport-linkedin-oauth2").Strategy;
+const User = require('../../backend/api/auth/model')
 const chalk = require("chalk");
 let user = {};
 
@@ -20,10 +21,26 @@ exports.githubStrategy = new GithubStrategy(
     clientSecret: process.env.GITHUB_clientSecret,
     callbackURL: "/auth/github/callback",
   },
-  (accessToken, refreshToken, profile, cb) => {
+  async (accessToken, refreshToken, profile, cb) => {
     console.log(chalk.yellow(JSON.stringify(profile)));
-    user = { ...profile };
-    return cb(null, profile);
+    console.log(chalk.red(JSON.stringify(profile)));
+
+    const newUser = {
+      googleId: profile.id,
+      displayName: profile.displayName,
+      email: profile.emails[0].value,
+      photo: profile.photos[0].value,
+      provider: "github"
+    }
+
+    let storedUser = await User.findOne({googleId: profile.id});
+    if(!storedUser){
+      tmp = await User.create(newUser);
+      console.log(tmp);
+      user = tmp;
+    }
+
+    return cb(null, profile);  
   }
 );
 
@@ -34,14 +51,29 @@ exports.googleStrategy = new GoogleStrategy(
     clientSecret: process.env.GOOGLE_clientSecret,
     callbackURL: "/auth/google/callback",
   },
-  (accessToken, refreshToken, profile, cb) => {
+  async (accessToken, refreshToken, profile, cb) => {
     console.log(chalk.red(JSON.stringify(profile)));
-    user = { ...profile };
+
+    const newUser = {
+      googleId: profile.id,
+      displayName: profile.displayName,
+      email: profile.emails[0].value,
+      photo: profile.photos[0].value,
+      provider: "google"
+    }
+
+    let storedUser = await User.findOne({googleId: profile.id});
+    if(!storedUser){
+      tmp = await User.create(newUser);
+      console.log(tmp);
+      user = tmp;
+    }
+
     return cb(null, profile);
   }
 );
-//Linkedin Stratergy
 
+//Linkedin Stratergy
 exports.linkedinStrategy = new LinkedInStrategy(
   {
     clientID: process.env.LINKEDIN_clientID,
@@ -50,9 +82,24 @@ exports.linkedinStrategy = new LinkedInStrategy(
     scope: ["r_emailaddress", "r_liteprofile"],
     passReqToCallback: true,
   },
-  (accessToken, refreshToken, profile, cb) => {
+  async (accessToken, refreshToken, profile, cb) => {
     console.log(chalk.blue(JSON.stringify(profile)));
-    user = { ...profile };
+
+    const newUser = {
+      googleId: profile.id,
+      displayName: profile.displayName,
+      email: profile.emails,
+      photo: profile.photo,
+      provider: "linkedin"
+    }
+
+    let storedUser = await User.findOne({googleId: profile.id});
+    if(!storedUser){
+      tmp = await User.create(newUser);
+      console.log(tmp);
+      user = tmp;
+    }
+
     return cb(null, profile);
   }
 );

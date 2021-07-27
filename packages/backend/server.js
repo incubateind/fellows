@@ -17,12 +17,11 @@ dotenv.config({ path: "./config/config.env" });
 require("dotenv").config();
 // Import DB
 const connectDB = require("./config/db");
-// connectDB();
+connectDB();
 require("colors");
 
 // route files
-const auth = require("./api/auth/controller");
-const user = require("./api/user");
+const auth = require("./api/auth/index");
 const app = express();
 // Body Parser
 
@@ -70,7 +69,6 @@ app.use(express.static(path.join(__dirname, "./public"), options));
 
 // Use Routes
 app.use("/", auth);
-app.use("/api/v1/user", user);
 app.get("*.*", express.static("./public/frontend")); // production
 
 app.all("*", (req, res) => {
