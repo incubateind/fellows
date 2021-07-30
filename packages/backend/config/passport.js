@@ -80,7 +80,6 @@ exports.linkedinStrategy = new LinkedInStrategy(
     clientSecret: process.env.LINKEDIN_clientSecret,
     callbackURL: "/auth/linkedin/callback",
     scope: ["r_emailaddress", "r_liteprofile"],
-    passReqToCallback: true,
   },
   async (accessToken, refreshToken, profile, cb) => {
     console.log(chalk.blue(JSON.stringify(profile)));
@@ -88,8 +87,8 @@ exports.linkedinStrategy = new LinkedInStrategy(
     const newUser = {
       googleId: profile.id,
       displayName: profile.displayName,
-      email: profile.emails,
-      photo: profile.photo,
+      email: profile.emails[0].value,
+      photo: profile.photos[1].value || profile.photos[0].value ,
       provider: "linkedin"
     }
 
