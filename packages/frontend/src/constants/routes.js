@@ -1,4 +1,4 @@
-export const LANDING = '/home'
+export const LANDING = '/home';
 export const DASHBOARD = '/dashboard';
 export const LOGIN = '/login';
 export const ANALYTICS = '/analytics';
