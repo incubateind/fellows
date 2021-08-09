@@ -1,11 +1,18 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { Layout, Menu } from 'antd';
+import classes from './LayoutSider.module.scss';
+
 import map from 'lodash/map';
 import get from 'lodash/get';
-import { Link } from 'react-router-dom';
 import MenuKeys from '../../../constants/menu';
 
+
+
 const { Sider } = Layout;
+
+
 
 export default function LayoutSider() {
   const [collapsed, setCollapsed] = useState(false);
@@ -15,7 +22,7 @@ export default function LayoutSider() {
       collapsible
       collapsed={collapsed}
       onCollapse={setCollapsed}
-      className="layout-sider"
+      className={classes.Layout_sider}
     >
       <Menu defaultSelectedKeys={['0']} mode="inline">
         {map(MenuKeys, (m, i) => {
