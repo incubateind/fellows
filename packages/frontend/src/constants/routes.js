@@ -1,4 +1,5 @@
 export const LANDING = '/home';
+export const PROFILE = '/profile';
 
 // Organization Details
 export const ORG_DASHBOARD = '/org_dashboard';

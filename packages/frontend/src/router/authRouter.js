@@ -1,7 +1,7 @@
 import { Route } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 
-import { LandingPage, 
+import { LandingPage, ProfilePage,
   OrgAnalyticsPage, OrgDashboardPage, // Organization Details
   DashboardPage, AnalyticsPage, HostEventFormPage, // Chapter Details
   EventsPage, EventDescPage, CommunitiesPage, CommunityDescPage, // Find
@@ -13,6 +13,7 @@ const AuthRouter = () => {
   return (
     <>
       <Route path={ROUTES.LANDING} exact component={() => <LandingPage />} />
+      <Route path={ROUTES.PROFILE} exact component={() => <ProfilePage />} />
 
       {/* Organization Details */}
       <Route path={ROUTES.ORG_DASHBOARD} exact component={() => <OrgDashboardPage />} />
