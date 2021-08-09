@@ -1,6 +1,11 @@
 export { default as LandingPage } from './Landing/Landing'
-
 export { default as ProfilePage } from './Profile/Profile'
+
+// Organization Details
+export { default as OrgAnalyticsPage } from './OrgAnalytics/OrgAnalytics'
+export { default as OrgDashboardPage } from './OrgDashboard/OrgDashboard'
+
+// Chapter Details
 export { default as DashboardPage } from './Dashboard/Dashboard'
 export { default as AnalyticsPage } from './Analytics/Analytics'
 export { default as HostEventFormPage } from './HostEventForm/HostEventForm'

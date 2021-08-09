@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { Layout, Dropdown, Avatar, Menu } from 'antd';
+import * as Routes from '../../../constants/routes'
 
 import {
   CaretDownFilled,
@@ -11,6 +13,7 @@ const { Header } = Layout;
 const LayoutHeader = () => {
   const menu = (
     <Menu className="profile-dropdown-sec">
+      <Menu.Item><Link to={Routes.PROFILE}>My Profile</Link></Menu.Item>
       <Menu.Item>Logout</Menu.Item>
     </Menu>
   );
