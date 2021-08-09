@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Layout, Dropdown, Avatar, Menu } from 'antd';
-import * as Routes from '../../../constants/routes'
+import classes from './LayoutHeader.module.scss'
+import * as Routes from '../../../constants/routes';
 
 import {
   CaretDownFilled,
@@ -12,27 +13,26 @@ const { Header } = Layout;
 
 const LayoutHeader = () => {
   const menu = (
-    <Menu className="profile-dropdown-sec">
+    <Menu>
       <Menu.Item><Link to={Routes.PROFILE}>My Profile</Link></Menu.Item>
       <Menu.Item>Logout</Menu.Item>
     </Menu>
   );
 
   const rightContainer = () => (
-    <div className="header-sub-container-2">
+    <div className={classes.Header_sub_container_2}>
       <Dropdown overlay={menu}>
-        <div className="user-img">
-          <CaretDownFilled />
-          Varun
-          <Avatar className="avtaar" size="large" icon={<UserOutlined />} />
+        <div className={classes.User_img}>
+          <CaretDownFilled /> Varun
+          <Avatar className={classes.Avtaar} size="large" icon={<UserOutlined />} />
         </div>
       </Dropdown>
     </div>
   );
 
   return (
-    <Header className="layout-header">
-      <div className="header-sub-container-1">
+    <Header className={classes.LayoutHeader}>
+      <div className={classes.Header_sub_container_1}>
         <DingdingOutlined style={{ fontSize: '24px' }} />
       </div>
       {rightContainer()}

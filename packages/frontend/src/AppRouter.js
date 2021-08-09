@@ -1,12 +1,16 @@
-import { Layout } from 'antd';
 import { BrowserRouter as Router } from 'react-router-dom';
-import LayoutHeader from './components/layout/LayoutHeader/LayoutHeader';
-import LayoutSider from './components/layout/LayoutSider/LayoutSider';
+
+import { Layout } from 'antd';
 
 import AuthRouter from '../src/router/authRouter';
+import { LayoutHeader, LayoutSider } from './components'
 import { LandingPage } from './Pages';
 
+
+
 const { Content } = Layout;
+
+
 
 const AppRouter = () => {
   const isLoggedIn = true;

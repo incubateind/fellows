@@ -1,4 +1,3 @@
-import './App.css';
 import './styles/App.scss';
 import AppRouter from './AppRouter';
 

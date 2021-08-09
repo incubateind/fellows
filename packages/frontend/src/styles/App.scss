@@ -1,4 +1,9 @@
+@import '~antd/dist/antd.css';
+
 // Layout
 @import './layout/content';
-@import './layout/sidebar';
-@import './layout/header';
+
+body {
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+}
