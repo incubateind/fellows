@@ -8,13 +8,27 @@ import {
 import * as Routes from './routes';
 
 const Menu = [
+  // Org Details
+  {
+    name: 'Org Dashboard',
+    icon: <HomeFilled className="sider-icon" />,
+    route: Routes.ORG_DASHBOARD,
+    subMenu: false
+  },
+  {
+    name: 'Org Analytics',
+    icon: <HomeFilled className="sider-icon" />,
+    route: Routes.ORG_ANALYTICS,
+    subMenu: false
+  },
+
+  // Chapter Details
   {
     name: 'Dashboard',
     icon: <HomeFilled className="sider-icon" />,
     route: Routes.DASHBOARD,
     subMenu: false,
   },
-
   {
     name: 'Analytics',
     icon: <AreaChartOutlined className="sider-icon" />,
@@ -27,6 +41,20 @@ const Menu = [
     route: Routes.HOST_EVENT,
     subMenu: false,
   },
+
+  // Find
+  {
+    name: 'Events',
+    icon: <TeamOutlined className="sider-icon" />,
+    route: Routes.EVENTS,
+    subMenu: false,
+  },
+  {
+    name: 'Events Desc (Temp)',
+    icon: <TeamOutlined className="sider-icon" />,
+    route: Routes.EVENTS_DESC,
+    subMenu: false,
+  },
   {
     name: 'Communities',
     icon: <TeamOutlined className="sider-icon" />,
@@ -34,29 +62,48 @@ const Menu = [
     subMenu: false,
   },
   {
-    name: 'Events',
+    name: 'Communities Desc (Temp)',
     icon: <TeamOutlined className="sider-icon" />,
-    route: Routes.EVENTS,
+    route: Routes.COMMUNITIES_DESC,
     subMenu: false,
   },
 
-  //   {
-  //     name: 'Subscription',
-  //     icon: <AuditOutlined className="sider-icon" />,
-  //     subMenu: true,
-  //     child: [
-  //       {
-  //         name: 'Gym Membership',
-  //         icon: <SolutionOutlined className="sider-icon" />,
-  //         route: Routes.GYM_MEMBERSHIP,
-  //       },
-  //       {
-  //         name: 'Gym Subscription',
-  //         icon: <SolutionOutlined className="sider-icon" />,
-  //         route: Routes.GYM_SUBSCRIPTION,
-  //       },
-  //     ],
-  //   },
+  // Manage
+  {
+    name: 'My Participations',
+    icon: <TeamOutlined className="sider-icon" />,
+    route: Routes.MY_PARTICIPATATIONS,
+    subMenu: false,
+  },
+  {
+    name: 'My Communities',
+    icon: <TeamOutlined className="sider-icon" />,
+    route: Routes.MY_COMMUNITIES,
+    subMenu: false,
+  },
+  {
+    name: 'Create Communities',
+    icon: <TeamOutlined className="sider-icon" />,
+    route: Routes.CREATE_COMMUNITY,
+    subMenu: false,
+  },
+  // {
+  //   name: 'Subscription',
+  //   icon: <TeamOutlined className="sider-icon" />,
+  //   subMenu: true,
+  //   child: [
+  //     {
+  //       name: 'Gym Membership',
+  //       icon: <TeamOutlined className="sider-icon" />,
+  //       route: Routes.CREATE_COMMUNITY,
+  //     },
+  //     {
+  //       name: 'Gym Subscription',
+  //       icon: <TeamOutlined className="sider-icon" />,
+  //       route: Routes.CREATE_COMMUNITY,
+  //     },
+  //   ],
+  // },
 ];
 
 export default Menu;

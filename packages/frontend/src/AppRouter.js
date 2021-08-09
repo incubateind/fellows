@@ -9,7 +9,7 @@ import { LandingPage } from './Pages';
 const { Content } = Layout;
 
 const AppRouter = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   return (
     <Router>
