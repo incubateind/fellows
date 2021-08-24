@@ -2,7 +2,7 @@ const passport = require("passport");
 const GithubStrategy = require("passport-github").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const LinkedInStrategy = require("passport-linkedin-oauth2").Strategy;
-const User = require('../../backend/api/auth/model')
+const User = require("../../backend/api/auth/model");
 const chalk = require("chalk");
 let user = {};
 
@@ -22,25 +22,24 @@ exports.githubStrategy = new GithubStrategy(
     callbackURL: "/auth/github/callback",
   },
   async (accessToken, refreshToken, profile, cb) => {
-    console.log(chalk.yellow(JSON.stringify(profile)));
-    console.log(chalk.red(JSON.stringify(profile)));
+    console.log(chalk.yellow(JSON.stringify(profile, null, 2)));
 
     const newUser = {
       googleId: profile.id,
       displayName: profile.displayName,
       email: profile.emails[0].value,
       photo: profile.photos[0].value,
-      provider: "github"
-    }
+      provider: "github",
+    };
 
-    let storedUser = await User.findOne({googleId: profile.id});
-    if(!storedUser){
+    let storedUser = await User.findOne({ googleId: profile.id });
+    if (!storedUser) {
       tmp = await User.create(newUser);
       console.log(tmp);
       user = tmp;
     }
 
-    return cb(null, profile);  
+    return cb(null, profile);
   }
 );
 
@@ -59,11 +58,11 @@ exports.googleStrategy = new GoogleStrategy(
       displayName: profile.displayName,
       email: profile.emails[0].value,
       photo: profile.photos[0].value,
-      provider: "google"
-    }
+      provider: "google",
+    };
 
-    let storedUser = await User.findOne({googleId: profile.id});
-    if(!storedUser){
+    let storedUser = await User.findOne({ googleId: profile.id });
+    if (!storedUser) {
       tmp = await User.create(newUser);
       console.log(tmp);
       user = tmp;
@@ -88,12 +87,12 @@ exports.linkedinStrategy = new LinkedInStrategy(
       googleId: profile.id,
       displayName: profile.displayName,
       email: profile.emails[0].value,
-      photo: profile.photos[1].value || profile.photos[0].value ,
-      provider: "linkedin"
-    }
+      photo: profile.photos[1].value || profile.photos[0].value,
+      provider: "linkedin",
+    };
 
-    let storedUser = await User.findOne({googleId: profile.id});
-    if(!storedUser){
+    let storedUser = await User.findOne({ googleId: profile.id });
+    if (!storedUser) {
       tmp = await User.create(newUser);
       console.log(tmp);
       user = tmp;
