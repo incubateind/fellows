@@ -9,6 +9,7 @@ const fileUpload = require("express-fileupload");
 const rateLimit = require("express-rate-limit");
 const path = require("path");
 const passport = require("passport");
+const session = require("express-session");
 
 // load env variables
 
@@ -47,9 +48,6 @@ app.use(hpp());
 
 app.use(cors());
 
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.options("*", cors());
 
 // file Upload
@@ -66,6 +64,16 @@ const options = {
   },
 };
 app.use(express.static(path.join(__dirname, "./public"), options));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(
+  session({
+    secret: "=oDaYLZJTCrxq/sKze2T",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }, // 1 hour
+  })
+);
 
 // Use Routes
 app.use("/", auth);
