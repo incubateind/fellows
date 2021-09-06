@@ -48,7 +48,7 @@ exports.googleStrategy = new GoogleStrategy(
   {
     clientID: process.env.GOOGLE_clientID,
     clientSecret: process.env.GOOGLE_clientSecret,
-    callbackURL: "/auth/google/callback",
+    callbackURL: "auth/google/callback",
   },
   async (accessToken, refreshToken, profile, cb) => {
     console.log(chalk.red(JSON.stringify(profile)));

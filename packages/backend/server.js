@@ -22,7 +22,8 @@ connectDB();
 require("colors");
 
 // route files
-const auth = require("./api/auth/index");
+const auth = require("./api/auth/index.js");
+//const user = require("./api/user/index")
 const app = express();
 // Body Parser
 
@@ -63,15 +64,14 @@ const options = {
         res.set('x-timestamp', Date.now());
     },
 };
-app.use(express.static(path.join(__dirname, './public'), options));
+
+app.use(express.static(path.join(__dirname, "../frontend", "build")))
 
 // Use Routes
-app.use('/api/v1/auth', auth);
-app.use('/api/v1/user', user);
-app.get('*.*', express.static('./public/frontend')); // production
+app.use('/api/auth', auth);
 
-app.all('*', (req, res) => {
-    res.status(200).sendFile('/', {root: './public/frontend'});
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));
 });
 
 app.use(errorHandler);
