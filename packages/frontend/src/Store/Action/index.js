@@ -1,0 +1,1 @@
+export { loginUser, registerUser } from './auth.action'

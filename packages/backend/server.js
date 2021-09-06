@@ -37,8 +37,8 @@ app.use(xss());
 // Rate Limit
 
 const limiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minutes
-  max: 10000, // limit each IP to 1000 requests per windowMs
+    windowMs: 60 * 1000, // 1 minutes
+    max: 10000, // limit each IP to 1000 requests per windowMs
 });
 app.use(limiter);
 // hpp
@@ -48,39 +48,30 @@ app.use(hpp());
 
 app.use(cors());
 
-app.options("*", cors());
+app.options('*', cors());
 
 // file Upload
 app.use(fileUpload());
 // set static folder
 const options = {
-  dotfiles: "ignore",
-  etag: false,
-  extensions: ["htm", "html"],
-  maxAge: "1d",
-  redirect: false,
-  setHeaders: function (res, path, stat) {
-    res.set("x-timestamp", Date.now());
-  },
+    dotfiles: 'ignore',
+    etag: false,
+    extensions: ['htm', 'html'],
+    maxAge: '1d',
+    redirect: false,
+    setHeaders: function(res, path, stat) {
+        res.set('x-timestamp', Date.now());
+    },
 };
-app.use(express.static(path.join(__dirname, "./public"), options));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(
-  session({
-    secret: "=oDaYLZJTCrxq/sKze2T",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000 }, // 1 hour
-  })
-);
+app.use(express.static(path.join(__dirname, './public'), options));
 
 // Use Routes
-app.use("/", auth);
-app.get("*.*", express.static("./public/frontend")); // production
+app.use('/api/v1/auth', auth);
+app.use('/api/v1/user', user);
+app.get('*.*', express.static('./public/frontend')); // production
 
-app.all("*", (req, res) => {
-  res.status(200).sendFile("/", { root: "./public/frontend" });
+app.all('*', (req, res) => {
+    res.status(200).sendFile('/', {root: './public/frontend'});
 });
 
 app.use(errorHandler);
@@ -89,10 +80,11 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server running on port ${PORT}`.yellow.bold));
 
 // Handle unhandled promise rejections
-process.on("unhandledRejection", (err, promise) => {
-  console.log(`Error: ${err.message}`.red);
-  // Close server & exit process
-  // server.close(() => process.exit(1));
+process.on('unhandledRejection', (err, promise) => {
+    console.log(`Error: ${err.message}`.red);
+    // Close server & exit process
+    // server.close(() => process.exit(1));
 });
+
 
 module.exports = app;
