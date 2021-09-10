@@ -7,51 +7,46 @@
 //     width: 100%;
 // }
 
-
 .Row {
-    // background-color: azure;
+  // background-color: azure;
 }
 
 .Col {
-    // background-color: beige;
-    padding: 1rem;
+  // background-color: beige;
+  padding: 1rem;
 }
 
 .HeroImg {
-    width: 100%;
-    height: 20rem;
-    background-color: #fff;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  width: 100%;
+  height: 20rem;
+  background-color: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .HeroTitle {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
-
-
-
 
 // HOST EVENT SECTION
 .Heading {
-    font-size: 2rem;
-    text-align: center;
+  font-size: 2rem;
+  text-align: center;
 }
 .HostEventCard {
+  background-color: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 2rem;
+  margin: 50px;
+}
+
+.OrgList {
+  display: flex;
+  & > div {
     width: 100%;
     height: 100%;
     background-color: #fff;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+      rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     padding: 2rem;
-}
-
-
-.OrgList {
-    display: flex;
-    &>div {
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-        padding: 2rem;
-    }
+  }
 }
