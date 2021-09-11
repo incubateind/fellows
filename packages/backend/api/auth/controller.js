@@ -1,5 +1,4 @@
 const express = require("express");
-const router = express.Router();
 const passport = require("passport");
 const auth = require("../../config/passport");
 const logout = require("express-passport-logout");
