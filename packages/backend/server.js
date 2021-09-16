@@ -30,7 +30,6 @@ app.use(express.json());
 // sanitize Data
 
 app.use(mongoSanitize());
-
 // xss-clean
 
 app.use(xss());
@@ -47,23 +46,12 @@ app.use(hpp());
 // cors
 
 app.use(cors());
-
 app.options("*", cors());
 
 // file Upload
 app.use(fileUpload());
-// set static folder
-const options = {
-  dotfiles: "ignore",
-  etag: false,
-  extensions: ["htm", "html"],
-  maxAge: "1d",
-  redirect: false,
-  setHeaders: function (res, path, stat) {
-    res.set("x-timestamp", Date.now());
-  },
-};
-app.use(express.static(path.join(__dirname, "./public"), options));
+
+// session
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(
@@ -75,12 +63,14 @@ app.use(
   })
 );
 
-// Use Routes
-app.use("/", auth);
-app.get("*.*", express.static("./public/frontend")); // production
+// set static folder
+app.use(express.static(path.join(__dirname, "../frontend", "build")))
 
-app.all("*", (req, res) => {
-  res.status(200).sendFile("/", { root: "./public/frontend" });
+// Use Routes
+app.use('/api/auth', auth);
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));
 });
 
 app.use(errorHandler);

@@ -13,25 +13,25 @@ passport.deserializeUser(auth.deserializeUser);
 passport.serializeUser(auth.serializeUser);
 
 //Github
-router.get("/auth/github", authController.authGithub);
+router.get("/github", authController.authGithub);
 router.get(
-  "/auth/github/callback",
+  "/github/callback",
   authController.authGithub,
   authController.redirect
 );
 
 //Google
-router.get("/auth/google", authController.authGoogle);
+router.get("/google", authController.authGoogle);
 router.get(
-  "/auth/google/callback",
+  "/google/callback",
   authController.authGoogleCallback,
   authController.redirect
 );
 
 //linkedin
-router.get("/auth/linkedin", authController.authLinkedin);
+router.get("/linkedin", authController.authLinkedin);
 router.get(
-  "/auth/linkedin/callback",
+  "/linkedin/callback",
   authController.authLinkedin,
   authController.redirect
 );
