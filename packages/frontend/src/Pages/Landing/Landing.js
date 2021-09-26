@@ -1,13 +1,26 @@
 // import classes from './Landing.module.scss';
 import { Row, Col, Button, Space, List, Card, Divider } from 'antd';
-import LayoutHeader from '../../components/layout/LayoutHeader/LayoutHeader';
 import hero_image from '../../Images/hero_image.svg';
 import './style.scss';
+import {    Drawer } from 'antd';
+import './style.scss'
+import {
+  MenuOutlined,
+} from '@ant-design/icons';
+import { useState } from 'react';
+import { Router, useHistory } from 'react-router';
 
+const LandingPage = ({setLoggedIn}) => {
 
+  setLoggedIn(false);
+  
 
-const LandingPage = () => {
+  const history = useHistory();
 
+ const handleLogin = () => {
+   setLoggedIn(true);
+   history.push('/dashboard');
+ }
 
   const data = [
     {
@@ -36,10 +49,52 @@ const LandingPage = () => {
     {content:'You can host events through the organizations you are a part of You can host events through the organizations you are a part of You can host events through the organizations you are a part of.', buttonText:'Create a community'}
   ]
 
+  const [visible, setVisible]= useState(false);
+
+  const onClickMenu = () => {
+    setVisible(!visible);
+  }
+
+  
+
 
   return (
     <div className="main-container">
-     <LayoutHeader/>
+     <div className="header">
+        <Row justify="space-between" align="middle">
+          <Col className="menu-logo">Fellows</Col>
+          <Col>
+            <Row>
+                <div className="menu">
+                <Space size="large">
+                <div className="menu-link">Leaderboard</div>
+                <div className="menu-link">Events</div>
+                <div className="menu-link" onClick={handleLogin} >Login</div>
+                <div className="menu-link">Sign Up</div>
+                </Space>
+                </div>
+                <MenuOutlined className="hamburger" onClick={onClickMenu} />
+            </Row>
+          </Col>
+        </Row>
+        <Drawer
+          title="Menu"
+          placement={"left"}
+          closable={true}
+          onClose={onClickMenu}
+          visible={visible}
+          width="100%"
+          className="drawer-menu"
+         
+        >
+            <Space size="large" direction="vertical">
+           <div className="menu-link">Leaderboard</div>
+                <div className="menu-link">Events</div>
+                <div className="menu-link">Login</div>
+                <div className="menu-link">Sign Up</div>
+                </Space>
+        </Drawer>
+      </div>
       <div className="landing-page">
         <div className="hero-section">
           <Row align="middle" justify="space-around" >

@@ -1,61 +1,40 @@
 import { Link } from 'react-router-dom';
-import { Layout, Dropdown, Avatar, Menu, Row, Col, Space, Drawer } from 'antd';
-
+import { Layout, Dropdown, Avatar, Menu } from 'antd';
+import classes from './LayoutHeader.module.scss'
 import * as Routes from '../../../constants/routes';
-import './style.scss'
-
 import {
-  MenuOutlined,
+  CaretDownFilled,
+  UserOutlined,
+  DingdingOutlined,
 } from '@ant-design/icons';
-import { useState } from 'react';
-
 const { Header } = Layout;
 
 const LayoutHeader = () => {
-  
+  const menu = (
+    <Menu>
+      <Menu.Item><Link to={Routes.PROFILE}>My Profile</Link></Menu.Item>
+      <Menu.Item>Logout</Menu.Item>
+    </Menu>
+  );
 
-  const [visible, setVisible]= useState(true);
-
-  const onClickMenu = () => {
-    setVisible(!visible);
-  }
+  const rightContainer = () => (
+    <div className={classes.Header_sub_container_2}>
+      <Dropdown overlay={menu}>
+        <div className={classes.User_img}>
+          <CaretDownFilled /> Varun
+          <Avatar className={classes.Avtaar} size="large" icon={<UserOutlined />} />
+        </div>
+      </Dropdown>
+    </div>
+  );
 
   return (
-    <div className="header">
-        <Row justify="space-between" align="middle">
-          <Col className="menu-logo">Fellows</Col>
-          <Col>
-            <Row>
-                <div className="menu">
-                <Space size="large">
-                <div className="menu-link">Leaderboard</div>
-                <div className="menu-link">Events</div>
-                <div className="menu-link">Login</div>
-                <div className="menu-link">Sign Up</div>
-                </Space>
-                </div>
-                <MenuOutlined className="hamburger" onClick={onClickMenu} />
-            </Row>
-          </Col>
-        </Row>
-        <Drawer
-          title="Menu"
-          placement={"left"}
-          closable={true}
-          onClose={onClickMenu}
-          visible={visible}
-          width="100%"
-          className="drawer-menu"
-         
-        >
-            <Space size="large" direction="vertical">
-           <div className="menu-link">Leaderboard</div>
-                <div className="menu-link">Events</div>
-                <div className="menu-link">Login</div>
-                <div className="menu-link">Sign Up</div>
-                </Space>
-        </Drawer>
+    <Header className={classes.LayoutHeader}>
+      <div className={classes.Header_sub_container_1}>
+        <DingdingOutlined style={{ fontSize: '24px' }} />
       </div>
+      {rightContainer()}
+    </Header>
   );
 };
 

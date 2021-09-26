@@ -1,0 +1,28 @@
+.LayoutHeader {
+    background-color: white !important;  
+    padding-left: 20px;
+    padding-right: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.Header_sub_container_1 {
+    flex: 1;
+}
+.Header_sub_container_2 {
+    flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+
+.User_img {
+    font-weight: 600;
+    font-size: 16px;
+}
+.Avtaar {
+    margin-right: 20px;
+    margin-left: 20px;
+}

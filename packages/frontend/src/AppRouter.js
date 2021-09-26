@@ -5,6 +5,8 @@ import { Layout } from 'antd';
 import AuthRouter from '../src/router/authRouter';
 import { LayoutHeader, LayoutSider } from './components'
 import { LandingPage } from './Pages';
+import React,{useState} from "react";
+import SimpleRouter from './router/simpleRouter';
 
 
 
@@ -13,14 +15,15 @@ const { Content } = Layout;
 
 
 const AppRouter = () => {
-  const isLoggedIn = false;
+  const [loggedIn,setLoggedIn] = useState(false);
+ 
 
   return (
     <Router>
-      {!isLoggedIn && <LandingPage />}
-      {isLoggedIn && (
+      {!loggedIn && <SimpleRouter setLoggedIn={setLoggedIn}/>}
+      {loggedIn && (
         <Layout className="parent-layout">
-          <LayoutHeader />
+         { <LayoutHeader />}
           <Layout className="child-layout">
             <LayoutSider />
             <Content className="super-content">
