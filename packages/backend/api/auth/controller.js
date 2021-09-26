@@ -1,71 +1,57 @@
-const ErrorResponse = require('../../util/errorResponse');
-const asyncHandler = require('../../middleware/async');
-const User = require('../user/model');
+const express = require("express");
+const passport = require("passport");
+const auth = require("../../config/passport");
+const logout = require("express-passport-logout");
 
-exports.register = asyncHandler(async (req, res, next)=>{
-    const {name, email, password, username} = req.body;
-    const user = await User.create({name, email, password, username});
-    sendTokenResponse(user, 200, res);
+passport.use(auth.githubStrategy);
+passport.use(auth.linkedinStrategy);
+passport.use(auth.googleStrategy);
+
+passport.deserializeUser(auth.deserializeUser);
+passport.serializeUser(auth.serializeUser);
+
+//Github
+const authGithub = passport.authenticate("github");
+
+//Google
+const authGoogle = passport.authenticate("google", {
+    scope: ["profile", "email"],
 });
 
-exports.login = asyncHandler(async (req, res, next) => {
-    const {email, password} = req.body;
+const authGoogleCallback = passport.authenticate("google");
 
-    // Validate email & password
-    if (!email || !password) {
-        return next(new ErrorResponse('Please provide an email and password', 400));
-    }
+//linkedin
+const authLinkedin = passport.authenticate("linkedin");
 
-    // Check for user
-    const user = await User.findOne({email}).select('+password');
+//userinfo
+const redirect = (req, res) => {
+  res.redirect(301, "http://localhost:3000/");
+};
 
-    if (!user) {
-        return next(new ErrorResponse('Invalid credentials', 401));
-    }
+const profile =  (req, res) => {
+  //res.send(user);
+  res.send("User Data");
+};
 
-    // Check if password matches
-    const isMatch = await user.matchPassword(password);
+const userInfo = (req, res) => {
+  console.log("getting user data!");
+};
 
-    if (!isMatch) {
-        return next(new ErrorResponse('Invalid credentials', 401));
-    }
-    sendTokenResponse(user, 200, res);
-});
+const authLogout =  (req, res) => {
+  logout();
+  console.log("logging out!");
+  user = {};
+  res.redirect(301, "http://localhost:3000/");
+};
 
-exports.logout = asyncHandler(async (req, res, next) => {
-    res.cookie('token', 'none', {
-        expires: new Date(Date.now() + 10 * 1000),
-        httpOnly: true,
-    });
 
-    res.status(200).json({
-        success: true,
-        data: {},
-    });
-});
-
-exports.updatePassword = asyncHandler(async (req, res, next) => {
-    const user = await User.findById(req.user.id).select('+password');
-
-    // Check current password
-    if (!(await user.matchPassword(req.body.currentPassword))) {
-        return next(new ErrorResponse('Password is incorrect', 401));
-    }
-
-    user.password = req.body.newPassword;
-    await user.save();
-
-    sendTokenResponse(user, 200, res);
-});
-
-// Get token from model, create cookie and send response
-const sendTokenResponse = (user, statusCode, res) => {
-    // Create token
-    const token = user.getSignedJwtToken();
-    const options = {
-        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
-        httpOnly: true,
-        secure: true
-    };
-    res.status(statusCode).cookie('token', token, options).json({success: true, token});
+module.exports = {
+  authGithub,
+  authGoogle,
+  authGoogleCallback,
+  authLinkedin,
+  authLogout,
+  userInfo,
+  redirect,
+  profile
 };
