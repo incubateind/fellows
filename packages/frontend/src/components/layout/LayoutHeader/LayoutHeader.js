@@ -45,6 +45,7 @@ const LayoutHeader = () => {
           onClose={onClickMenu}
           visible={visible}
           width="100%"
+          className="drawer-menu"
          
         >
             <Space size="large" direction="vertical">
