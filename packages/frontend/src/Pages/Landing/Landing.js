@@ -4,12 +4,7 @@ import LayoutHeader from '../../components/layout/LayoutHeader/LayoutHeader';
 import hero_image from '../../Images/hero_image.svg';
 import './style.scss';
 
-const organizations = [
-  'Organization 1',
-  'Organization 2',
-  'Organization 3',
-  'Organization 4',
-];
+
 
 const LandingPage = () => {
 
@@ -47,20 +42,20 @@ const LandingPage = () => {
      <LayoutHeader/>
       <div className="landing-page">
         <div className="hero-section">
-          <Row align="middle" justify="space-around">
-            <Col className="hero-left" span={12}>
-              <div className="hero-title">A Community Building Platform</div>
+          <Row align="middle" justify="space-around" >
+            <Col className="hero-left"  xs={24} xl={8}>
+              <div className="hero-title">Fellows - A Community Building Platform</div>
               <div className="hero-subtitle">
                 A unique and exclusive program for the coder, hackers, designers
-                and innovators of tomorrow
+                and innovators of tomorrow.
               </div>
               <Space>
                 <Button type="primary">Participate in Events</Button>
                 <Button>Host Events</Button>
               </Space>
             </Col>
-            <Col className="hero-right" span={12}>
-              <img src={hero_image} alt="" />
+            <Col className="hero-right"  xs={24} xl={8}>
+              <img src={hero_image} alt="" className="hero_image" />
             </Col>
           </Row>
          

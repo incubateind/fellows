@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Layout, Dropdown, Avatar, Menu, Row, Col, Space, Drawer } from 'antd';
-import classes from './LayoutHeader.module.scss'
+
 import * as Routes from '../../../constants/routes';
 import './style.scss'
 

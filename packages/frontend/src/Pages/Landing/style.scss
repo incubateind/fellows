@@ -1,10 +1,10 @@
-.main-container {
+
   .hero-title {
-    font-size: 50px;
+    font-size: xx-large;
     font-weight: 700;
   }
   .hero-subtitle {
-    font-size: 24px;
+    font-size: large;
     margin-bottom: 20px;
   }
   .menu-links {
@@ -22,11 +22,39 @@
   }
   .hero-section {
     height: 85vh;
+   
   }
   .section-title {
-    font-size: 24px;
+    font-size: x-large;
     margin-bottom: 20px;
     font-weight: 700;
     text-align: center;
   }
-}
+  .hero_image{
+    margin-left: -100px;
+  }
+
+
+@media only screen and (max-width: 768px) {
+
+
+ 
+  .header {
+    padding: 15px 30px ;
+  }
+  .landing-page {
+    padding: 15px 30px;
+  }
+  .hero-title{
+    font-size: x-large;
+  }
+  .hero-subtitle{
+    font-size: medium;
+  }
+  .hero_image{
+    margin-left: 0px;
+    max-width: 350px;
+  }
+ } 
+
+
