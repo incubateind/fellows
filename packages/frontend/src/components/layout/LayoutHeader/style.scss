@@ -1,0 +1,17 @@
+.hamburger{
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+   
+    .menu{
+        display: none;
+    }
+
+   
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+}

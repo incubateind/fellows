@@ -1,5 +1,6 @@
-import classes from './Landing.module.scss';
-import { Row, Col, Button, Space } from 'antd';
+// import classes from './Landing.module.scss';
+import { Row, Col, Button, Space, List, Card, Divider } from 'antd';
+import LayoutHeader from '../../components/layout/LayoutHeader/LayoutHeader';
 import hero_image from '../../Images/hero_image.svg';
 import './style.scss';
 
@@ -11,23 +12,39 @@ const organizations = [
 ];
 
 const LandingPage = () => {
+
+
+  const data = [
+    {
+      title: 'Organization 1',
+    },
+    {
+      title: 'Organization 2',
+    },
+    {
+      title: 'Organization 3',
+    },
+    {
+      title: 'Organization 4',
+    },
+    {
+      title: 'Organization 5',
+    },
+    {
+      title: 'Organization 6',
+    },
+   
+  ];
+
+  const hostWays = [
+    {content:'You can host events through the organizations you are a part of You can host events through the organizations you are a part of You can host events through the organizations you are a part of.', buttonText:'Join a community'},
+    {content:'You can host events through the organizations you are a part of You can host events through the organizations you are a part of You can host events through the organizations you are a part of.', buttonText:'Create a community'}
+  ]
+
+
   return (
     <div className="main-container">
-      <div className="header">
-        <Row justify="space-between" align="middle">
-          <Col className="menu-logo">Fellows</Col>
-          <Col>
-            <Row>
-              <Space size="large">
-                <div className="menu-links">Leaderboard</div>
-                <div className="menu-links">Events</div>
-                <div className="menu-links">Login</div>
-                <div className="menu-links">Sign Up</div>
-              </Space>
-            </Row>
-          </Col>
-        </Row>
-      </div>
+     <LayoutHeader/>
       <div className="landing-page">
         <div className="hero-section">
           <Row align="middle" justify="space-around">
@@ -46,101 +63,47 @@ const LandingPage = () => {
               <img src={hero_image} alt="" />
             </Col>
           </Row>
-          {/* <Row className={classes.Row} type="flex" align="middle" justify="center">
-            <Col xs={24} md={11} xl={10} className={classes.Col}>
-                <div className={classes.HeroImg}></div>
-            </Col>
-            <Col xs={24} md={11} xl={10} className={classes.Col}>
-                <h1 className={classes.HeroTitle}>This is a Big Tagline Given by Incubate IND</h1>
-                <Space>
-                    <Button>Participate In Events</Button>
-                    <Button type="primary">Host Events</Button>
-                </Space>
-            </Col>
-        </Row>
-        <br/><br/><br/><br/>
-
-
-        <h1 className={classes.Heading}>HOW DO I HOST EVENTS?</h1>
-        <Row className={classes.Row} type="flex" align="middle" justify="center" gutter={[40,20]}>
-            <Col xs={18} xl={9}>
-                <div className={classes.HostEventCard}>
-                    <p>You can host events through the organizations you are a part of You can host events through the organizations you are a part of You can host events through the organizations you are a part of</p>
-                    <br/><Button block type="primary">Join Communities</Button>
-                </div>
-            </Col>
-            <Col xs={18} xl={9}>
-                <div className={classes.HostEventCard}>
-                    <p>You can host events through the organizations you are a part of You can host events through the organizations you are a part of You can host events through the organizations you are a part of</p>
-                    <br/><Button block type="primary">Create Community</Button>
-                </div>
-            </Col>
-        </Row><br/>
-
-        <Row className={classes.Row} type="flex" align="middle" justify="center" gutter={[40,20]}>
-            <Col span={18}>
-                <div className={classes.HostEventCard}>
-                    <p>You can host events through the organizations you are a part of</p>
-                    <div className={classes.OrgList}>
-                        {organizations.map(org => <div>{org}</div>)}
-                    </div>
-                </div>
-            </Col>
-        </Row> */}
+         
         </div>
         <div className="events-section">
           <div className="section-title">How Do I Host Events?</div>
-          <Row type="flex" align="middle" justify="space-between">
-            <Col span={12}>
-              <div className={classes.HostEventCard}>
-                <p>
-                  You can host events through the organizations you are a part
-                  of You can host events through the organizations you are a
-                  part of You can host events through the organizations you are
-                  a part of
-                </p>
-                <br />
-                <Button block type="primary">
-                  Join Communities
-                </Button>
-              </div>
-            </Col>
-            <Col span={12}>
-              <div className={classes.HostEventCard}>
-                <p>
-                  You can host events through the organizations you are a part
-                  of You can host events through the organizations you are a
-                  part of You can host events through the organizations you are
-                  a part of
-                </p>
-                <br />
-                <Button block type="primary">
-                  Create Community
-                </Button>
-              </div>
-            </Col>
-          </Row>
-          <Row
-            className={classes.Row}
-            type="flex"
-            align="middle"
-            justify="center"
-            gutter={[40, 20]}
-          >
-            <Col span={18}>
-              <div className={classes.HostEventCard}>
-                <p>
-                  You can host events through the organizations you are a part
-                  of
-                </p>
-                <div className={classes.OrgList}>
-                  {organizations.map((org) => (
-                    <div>{org}</div>
-                  ))}
-                </div>
-              </div>
-            </Col>
-          </Row>
+          <List
+    grid={{
+      gutter: 16,
+      xs: 1,
+      sm: 2,
+      md: 2,
+      lg: 2,
+      xl: 2,
+      xxl: 2,
+    }}
+    dataSource={hostWays}
+    renderItem={item => (
+      <List.Item>
+        <Card ><div>{item.content}</div>
+        <Divider/>
+        <Button type="primary">{item.buttonText}</Button></Card>
+      </List.Item>
+    )}
+  /><br/>
+   <div className="section-title">Organisations you can be a part of</div><br/>
+          <List
+    grid={{
+      gutter: 16,
+      xs: 1,
+      sm: 2,
+      md: 4,
+      lg: 4,
+      xl: 3,
+      xxl: 3,
+    }}
+    dataSource={data}
+    renderItem={item => (
+      <List.Item>
+        <Card title={item.title}>The place for cloud developers and architects to come together to learn, discuss and explore the latest advances in cloud technologies.</Card>
+      </List.Item>
+    )}
+  />,
         </div>
       </div>
     </div>
