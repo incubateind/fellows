@@ -23,6 +23,8 @@ require("colors");
 
 // route files
 const auth = require("./api/auth/index");
+const community = require("./api/community/index");
+
 const app = express();
 // Body Parser
 
@@ -68,6 +70,7 @@ app.use(express.static(path.join(__dirname, "../frontend", "build")))
 
 // Use Routes
 app.use('/api/auth', auth);
+app.use('/api/community', community);
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));
