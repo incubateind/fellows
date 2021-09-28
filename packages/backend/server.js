@@ -10,19 +10,33 @@ const rateLimit = require("express-rate-limit");
 const path = require("path");
 const passport = require("passport");
 const session = require("express-session");
-
 // load env variables
 
 dotenv.config({ path: "./config/config.env" });
 
 require("dotenv").config();
 // Import DB
-const connectDB = require("./config/db");
-connectDB();
+
+const db = require("./config/db");
+
+db.connectDB.then((status) => {
+  if(status==true) {
+    // const scheduler = require("./api/leaderboad/scheduler");
+    // scheduler.cronJob();
+  }
+});
+
+db.connectRedis.catch((err) => {
+  console.log(err);
+})
+
 require("colors");
 
 // route files
 const auth = require("./api/auth/index");
+const community = require("./api/community/index");
+const leaderboard = require("./api/leaderboad/index");
+
 const app = express();
 // Body Parser
 
@@ -68,6 +82,9 @@ app.use(express.static(path.join(__dirname, "../frontend", "build")))
 
 // Use Routes
 app.use('/api/auth', auth);
+app.use('/api/community', community);
+app.use('/api/leaderboard', leaderboard);
+
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));

@@ -12,7 +12,9 @@
     "Express"
   ],
   "dependencies": {
+    "axios": "^0.21.4",
     "bcryptjs": "^2.4.3",
+    "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "chalk": "^4.1.1",
     "colors": "^1.4.0",
@@ -29,14 +31,19 @@
     "express-session": "^1.17.2",
     "hpp": "^0.2.3",
     "http-errors": "~1.6.3",
+    "ioredis": "^4.27.9",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.13",
+    "mongoose-paginate-v2": "^1.4.2",
+    "node-schedule": "^2.0.0",
     "nodemon": "^2.0.12",
     "passport": "^0.4.1",
     "passport-github": "^1.1.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-linkedin-oauth2": "^2.0.0",
     "path": "^0.12.7",
+    "redis": "^3.1.2",
+    "redis-stream": "^0.1.0",
     "xss": "^1.0.9",
     "xss-clean": "^0.1.1"
   }
