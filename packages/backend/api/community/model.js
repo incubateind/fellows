@@ -3,7 +3,7 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 
 const communitySchema = new mongoose.Schema({
         
-    org_id: { type: Object, required: true },
+    org_id: { type: String, required: true },
     name: { type: String, required: true },
     description: { type: String, required: true },
     region: { type: String, required: true },
@@ -18,6 +18,6 @@ const communitySchema = new mongoose.Schema({
     
 });
 
-communitySchema.plugin(mongoosePaginate)
+communitySchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('communities', communitySchema);

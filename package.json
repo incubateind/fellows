@@ -6,6 +6,7 @@
     ],
     "scripts": {
         "start": "node packages/backend/server.js",
+        "dev": "nodemon packages/backend/server.js",
         "postinstall": "husky install",
         "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd packages/frontend && npm install && npm run build",
         "prepare": "husky install"
