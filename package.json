@@ -4,7 +4,27 @@
     "workspaces": [
         "packages/*"
     ],
+
+    "scripts": {
+        "postinstall": "husky install",
+        "prepare": "husky install"
+    },
+    "lint-staged": {
+        "**/*.{js,jsx,ts,tsx}": [
+            "yarn eslint --fix",
+            "yarn prettier --write"
+        ]
+    },
     "devDependencies": {
-        "lerna": "^4.0.0"
+        "@commitlint/cli": "^13.1.0",
+        "@commitlint/config-conventional": "^13.1.0",
+        "eslint": "^7.32.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-plugin-import": "^2.24.0",
+        "husky": "^7.0.1",
+        "husky-init": "^7.0.0",
+        "lerna": "^4.0.0",
+        "lint-staged": "^11.1.2",
+        "prettier": "^2.3.2"
     }
 }

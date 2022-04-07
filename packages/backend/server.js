@@ -1,27 +1,29 @@
-const express = require('express');
-const errorHandler = require('./middleware/error');
-const mongoSanitize = require('express-mongo-sanitize');
-const xss = require('xss-clean');
-const dotenv = require('dotenv')
-const cors = require('cors');
-const hpp = require('hpp');
-const fileUpload = require('express-fileupload');
-const rateLimit = require('express-rate-limit');
-const path = require('path');
+const express = require("express");
+const errorHandler = require("./middleware/error");
+const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const hpp = require("hpp");
+const fileUpload = require("express-fileupload");
+const rateLimit = require("express-rate-limit");
+const path = require("path");
+const passport = require("passport");
+const session = require("express-session");
 
 // load env variables
 
-dotenv.config({path:'./config/config.env'})
+dotenv.config({ path: "./config/config.env" });
 
-require('dotenv').config();
+require("dotenv").config();
 // Import DB
-const connectDB = require('./config/db');
+const connectDB = require("./config/db");
 connectDB();
-require('colors');
+require("colors");
 
 // route files
-const auth = require('./api/auth');
-const user = require('./api/user');
+const auth = require("./api/auth/index.js");
+//const user = require("./api/user/index")
 const app = express();
 // Body Parser
 
@@ -62,15 +64,14 @@ const options = {
         res.set('x-timestamp', Date.now());
     },
 };
-app.use(express.static(path.join(__dirname, './public'), options));
+
+app.use(express.static(path.join(__dirname, "../frontend", "build")))
 
 // Use Routes
-app.use('/api/v1/auth', auth);
-app.use('/api/v1/user', user);
-app.get('*.*', express.static('./public/frontend')); // production
+app.use('/api/auth', auth);
 
-app.all('*', (req, res) => {
-    res.status(200).sendFile('/', {root: './public/frontend'});
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "build", "index.html"));
 });
 
 app.use(errorHandler);
